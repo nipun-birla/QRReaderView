@@ -1,18 +1,24 @@
-QRCodeReaderView
+QRReaderView
 ===
 
 #### Modification of <a href="https://github.com/dlazaro66/QRCodeReaderView">QRCodeReaderView</a> by <a href="https://github.com/dlazaro66">dlazaro66</a> which is essentially a modification of  ZXING Barcode Scanner project for easy Android QR-Code detection and AR purposes. ####
 
-This project implements an Android view which show camera and notify when there's a QR code inside the preview.
+This project implements an Android view which previews camera and notify when there's a QR code detected.
 
-Some Classes of camera controls and autofocus are taken and slightly modified from Barcode Scanner Android App.
+Some Classes of camera controls and autofocus are taken and slightly modified from QRCodeReaderView by dlazaro66.
 
 You can also use this for Augmented Reality purposes, as you get QR control points coordinates when decoding.
 
 Usage
 -----
+<!--
+Add dependency in your build.gradle(app)
 
-- Add a "QRCodeReaderView" in the layout editor like you actually do with a button for example.
+    dependencies {
+        compile 'com.github.nipun-birla:Swipe3DRotateView:0.0.1'
+    }
+-->
+- Add "QRReaderView" in XML.
 - In your onCreate method, you can find the view as usual, using findViewById() function.
 - Create an Activity which implements `onQRCodeReadListener`, and let implements required methods or set a `onQRCodeReadListener` to the QRCodeReaderView object
 - Make sure you have camera permissions in order to use the library. (https://developer.android.com/training/permissions/requesting.html)
@@ -89,32 +95,6 @@ Add it to your project
 Add QRCodeReaderView dependency to your build.gradle
 
 
-
-```groovy
-
-dependencies{
-      compile 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.1'
-}
-```
-
-Note: There is an issue with gradle 2.10, if you declare your dependency and it can't be found in jCenter repository (`could not find qrcodereaderview.jar Searched in the following locations:` or similar), try to declare the library dependency like this:
-
-```groovy
-
-dependencies{
-      compile ('com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.1@aar'){
-        transitive = true
-      }
-}
-```
-And in some cases, you need to clean your Gradle cache
-`./gradlew build --refresh-dependencies`
-
-Do you want to contribute?
---------------------------
-
-Please send a PR or open an issue with your comments!
-
 Libraries used in this project
 ------------------------------
 
@@ -129,7 +109,7 @@ Screenshots
 Developed By
 ------------
 
-* David Lázaro Esparcia
+* Nipun Birla
 
 <a href="https://twitter.com/_dlazaro">
   <img alt="Follow me on Twitter" src="../master/readme_images/logo-twitter.png?raw=true" />
@@ -137,33 +117,6 @@ Developed By
 <a href="https://es.linkedin.com/pub/david-lázaro-esparcia/49/4b3/342">
   <img alt="Add me to Linkedin" src="../master/readme_images/logo-linkedin.png?raw=true" />
 </a>
-
-
-Who's using it
---------------
-
-*Does your app use QRCodeReaderView? If you want to be featured on this list drop me a line.*
-
-* [Swapcard][2]
-
-
-License
--------
-
-    Copyright 2013 David Lázaro
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
 
 [1]: https://github.com/zxing/zxing/
 [2]: https://www.swapcard.com/
