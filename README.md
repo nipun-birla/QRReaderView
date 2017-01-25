@@ -37,9 +37,8 @@ Put QRReaderView in your layout as required :
 - You can place widgets or views over QRReaderView.
 
 ```java
-	public class DecoderActivity extends Activity implements OnQRCodeReadListener {
+	public class MyActivity extends Activity implements OnQRCodeReadListener {
 
-    private TextView resultTextView;
 	private QRReaderView qrReaderView;
 
 	@Override
@@ -71,7 +70,8 @@ Put QRReaderView in your layout as required :
     // "points" : points where QR control points are placed in View
 	@Override
 	public void onQRCodeRead(String text, PointF[] points) {
-		resultTextView.setText(text);
+		Toast.makeText(MyActivity.this, text, Toast.LENGTH_SHORT).show();
+		qrReaderView.setQRDecodingEnabled(false);
 	}
 
 	@Override
