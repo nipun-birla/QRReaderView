@@ -12,6 +12,8 @@ You can also use this for Augmented Reality purposes, as you get QR control poin
 Usage
 -----
 
+![Image](https://cloud.githubusercontent.com/assets/7312366/22305793/df6acf62-e362-11e6-8102-46c42f64f1fc.gif)
+
 - Make sure you have camera permissions in order to use the library. (https://developer.android.com/training/permissions/requesting.html)
 
 
@@ -88,9 +90,7 @@ Put QRReaderView in your layout as required :
 
 Tips
 ------------------------------
-- If you are using QRReaderView inside a view pager, it is recommended to turn camera preview off on selecting a different tab.
-
-Check qrpagersample project above to see how to control camera in that case.
+- If you are using QRReaderView inside a view pager, it is recommended to turn camera preview off on selecting a different tab. Check qrpagersample project above to see how to control camera in that case.
 
 - Similar case can occur if a fragment is added on top of QRReaderView and should be handled.
 
@@ -98,11 +98,6 @@ Libraries used in this project
 ------------------------------
 
 * [ZXING] [1]
-
-Screenshots
------------
-
-![Image](../master/readme_images/app-example.gif?raw=true)
 
 
 Developed By
