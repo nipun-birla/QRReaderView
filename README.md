@@ -11,6 +11,10 @@ You can also use this for Augmented Reality purposes, as you get QR control poin
 
 Usage
 -----
+
+- Make sure you have camera permissions in order to use the library. (https://developer.android.com/training/permissions/requesting.html)
+
+
 <!--
 Add dependency in your build.gradle(app)
 
@@ -18,51 +22,46 @@ Add dependency in your build.gradle(app)
         compile 'com.github.nipun-birla:Swipe3DRotateView:0.0.1'
     }
 -->
-- Add "QRReaderView" in XML.
-- In your onCreate method, you can find the view as usual, using findViewById() function.
-- Create an Activity which implements `onQRCodeReadListener`, and let implements required methods or set a `onQRCodeReadListener` to the QRCodeReaderView object
-- Make sure you have camera permissions in order to use the library. (https://developer.android.com/training/permissions/requesting.html)
 
+Put QRReaderView in your layout as required :
 ```xml
-
- <com.dlazaro66.qrcodereaderview.QRCodeReaderView
-        android:id="@+id/qrdecoderview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+    <com.nipunbirla.qrreaderview.QRCodeReaderView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 ```
 
-- Start & Stop camera preview in onPause() and onResume() overriden methods.
-- You can place widgets or views over QRDecoderView.
+- Create an Activity/Fragment which implements `onQRCodeReadListener`, and let implements required methods or set a `onQRCodeReadListener` to the QRReaderView object
+- Start & Stop camera preview in onStart() and onStop() overriden methods.
+- You can place widgets or views over QRReaderView.
 
 ```java
 	public class DecoderActivity extends Activity implements OnQRCodeReadListener {
 
     private TextView resultTextView;
-	private QRCodeReaderView qrCodeReaderView;
+	private QRReaderView qrReaderView;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_decoder);
 
-        mydecoderview = (QRCodeReaderView) findViewById(R.id.qrdecoderview);
-        mydecoderview.setOnQRCodeReadListener(this);
+        qrReaderView = (QRReaderView) findViewById(R.id.qrdecoderview);
+        qrReaderView.setOnQRCodeReadListener(this);
 
     	// Use this function to enable/disable decoding
-        mydecoderview.setQRDecodingEnabled(true);
+        qrReaderView.setQRDecodingEnabled(true);
 
         // Use this function to change the autofocus interval (default is 5 secs)
-        mydecoderview.setAutofocusInterval(2000L);
+        qrReaderView.setAutofocusInterval(2000L);
 
         // Use this function to enable/disable Torch
-        mydecoderview.setTorchEnabled(true);
+        qrReaderView.setTorchEnabled(true);
 
         // Use this function to set front camera preview
-        mydecoderview.setFrontCamera();
+        qrReaderView.setFrontCamera();
 
         // Use this function to set back camera preview
-        mydecoderview.setBackCamera();
+        qrReaderView.setBackCamera();
     }
 
     // Called when a QR is decoded
@@ -74,26 +73,18 @@ Add dependency in your build.gradle(app)
 	}
 
 	@Override
-	protected void onResume() {
+	protected void onStart() {
 		super.onResume();
-		qrCodeReaderView.startCamera();
+		qrReaderView.startCamera();
 	}
 
 	@Override
-	protected void onPause() {
+	protected void onStop() {
 		super.onPause();
-		qrCodeReaderView.stopCamera();
+		qrReaderView.stopCamera();
 	}
 }
 ```
-
-
-Add it to your project
-----------------------
-
-
-Add QRCodeReaderView dependency to your build.gradle
-
 
 Libraries used in this project
 ------------------------------
@@ -109,14 +100,6 @@ Screenshots
 Developed By
 ------------
 
-* Nipun Birla
-
-<a href="https://twitter.com/_dlazaro">
-  <img alt="Follow me on Twitter" src="../master/readme_images/logo-twitter.png?raw=true" />
-</a>
-<a href="https://es.linkedin.com/pub/david-lázaro-esparcia/49/4b3/342">
-  <img alt="Add me to Linkedin" src="../master/readme_images/logo-linkedin.png?raw=true" />
-</a>
+* <a href="https://in.linkedin.com/in/nipunbirla">Nipun Birla</a>
 
 [1]: https://github.com/zxing/zxing/
-[2]: https://www.swapcard.com/
