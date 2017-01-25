@@ -86,6 +86,14 @@ Put QRReaderView in your layout as required :
 }
 ```
 
+Tips
+------------------------------
+- If you are using QRReaderView inside a view pager, it is recommended to turn camera preview off on selecting a different tab.
+
+Check qrpagersample project above to see how to control camera in that case.
+
+- Similar case can occur if a fragment is added on top of QRReaderView and should be handled.
+
 Libraries used in this project
 ------------------------------
 
