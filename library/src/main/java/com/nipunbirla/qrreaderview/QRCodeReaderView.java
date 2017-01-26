@@ -282,7 +282,7 @@ public class QRCodeReaderView extends TextureView
 
     private void adjustRatio(){
 
-//        if(!mAdjustRatio) return;
+        if(!mAdjustRatio) return;
 
         float requiredAR = (float) mPreviewWidth/(float) mPreviewHeight;
         float curAR = (float) mSurfaceWidth/(float) mSurfaceHeight;
