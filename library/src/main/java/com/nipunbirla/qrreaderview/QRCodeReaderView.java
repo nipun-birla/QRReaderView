@@ -282,7 +282,7 @@ public class QRCodeReaderView extends TextureView
 
     private void adjustRatio(){
 
-        if(!mAdjustRatio) return;
+//        if(!mAdjustRatio) return;
 
         float requiredAR = (float) mPreviewWidth/(float) mPreviewHeight;
         float curAR = (float) mSurfaceWidth/(float) mSurfaceHeight;
@@ -298,7 +298,7 @@ public class QRCodeReaderView extends TextureView
         // calculate transformation matrix
         Matrix matrix = new Matrix();
 
-        matrix.setScale(ratio, 1);
+        matrix.setScale(ratio, 1, mSurfaceHeight/2, mSurfaceWidth/2);
         this.setTransform(matrix);
     }
 
