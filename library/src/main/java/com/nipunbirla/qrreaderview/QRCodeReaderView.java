@@ -114,6 +114,8 @@ public class QRCodeReaderView extends TextureView
      */
     public void startCamera() {
 
+        //Check added here as surface is already created if initially app does not have camera permission but driver fails to open,
+        //Once permission is granted, try open driver again on start camera
         if(!mCameraManager.isOpen()){
             try {
                 mCameraManager.openDriver(getSurfaceTexture(), this.getWidth(), this.getHeight());
@@ -121,7 +123,8 @@ public class QRCodeReaderView extends TextureView
                 mPreviewHeight = mCameraManager.getPreviewSize().y;
                 mQRCodeReader = new QRCodeReader();
             } catch (IOException e) {
-
+                Log.e(TAG, "Can not openDriver: " + e.getMessage());
+                mCameraManager.closeDriver();
             }
         }
 
