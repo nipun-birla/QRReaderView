@@ -5,7 +5,7 @@ QRReaderView
 
 This project implements an Android view which previews camera and notify when there's a QR code detected.
 
-Some Classes of camera controls and autofocus are taken and slightly modified from QRCodeReaderView by dlazaro66.
+Some Classes of camera controls and the view are taken and slightly modified from QRCodeReaderView by dlazaro66.
 
 You can also use this for Augmented Reality purposes, as you get QR control points coordinates when decoding.
 
