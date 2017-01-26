@@ -17,13 +17,13 @@ Usage
 - Make sure you have camera permissions in order to use the library. (https://developer.android.com/training/permissions/requesting.html)
 
 
-<!--
+
 Add dependency in your build.gradle(app)
 
     dependencies {
-        compile 'com.github.nipun-birla:Swipe3DRotateView:0.0.1'
+        compile 'com.github.nipun-birla:qrreaderview:0.0.1'
     }
--->
+
 
 Put QRReaderView in your layout as required :
 ```xml
