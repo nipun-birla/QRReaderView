@@ -1,6 +1,7 @@
 package com.nipunbirla.qrreaderview;
 
 import android.content.Context;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
@@ -57,10 +58,11 @@ public class QRCodeReaderView extends TextureView
 
 
     private QRCodeReader mQRCodeReader;
-    private int mPreviewWidth;
-    private int mPreviewHeight;
+    private int mPreviewWidth, mSurfaceWidth;
+    private int mPreviewHeight, mSurfaceHeight;
     private CameraManager mCameraManager;
     private boolean mQrDecodingEnabled = true;
+    private boolean mAdjustRatio = false;
     private DecodeFrameTask decodeFrameTask;
     private int mCameraId;
 
@@ -206,14 +208,18 @@ public class QRCodeReaderView extends TextureView
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        Log.d(TAG, "surfaceCreated");
+        Log.d(TAG, "surfaceCreated : w = " + width + " : h = " + height);
 
         try {
             // Indicate camera, our View dimensions
             mCameraManager.openDriver(surface, this.getWidth(), this.getHeight());
             mPreviewWidth = mCameraManager.getPreviewSize().x;
             mPreviewHeight = mCameraManager.getPreviewSize().y;
+            mSurfaceWidth = height;
+            mSurfaceHeight = width;
             mQRCodeReader = new QRCodeReader();
+
+            adjustRatio();
 
             mCameraManager.startPreview();
 
@@ -247,7 +253,7 @@ public class QRCodeReaderView extends TextureView
             return;
         }
 
-
+        adjustRatio();
 
         mCameraManager.setPreviewCallback(this);
 
@@ -268,6 +274,32 @@ public class QRCodeReaderView extends TextureView
                 mCameraManager.closeDriver();
             }
         }
+    }
+
+    public void setAdjustRatio(boolean val){
+        mAdjustRatio = val;
+    }
+
+    private void adjustRatio(){
+
+        if(!mAdjustRatio) return;
+
+        float requiredAR = (float) mPreviewWidth/(float) mPreviewHeight;
+        float curAR = (float) mSurfaceWidth/(float) mSurfaceHeight;
+
+        float ratio;
+
+        if(curAR > requiredAR){
+            ratio = requiredAR/curAR;
+        } else {
+            ratio = curAR/requiredAR;
+        }
+
+        // calculate transformation matrix
+        Matrix matrix = new Matrix();
+
+        matrix.setScale(ratio, 1);
+        this.setTransform(matrix);
     }
 
     private Camera.Size getBestPreviewSize(int w, int h, Camera.Parameters parameters){
